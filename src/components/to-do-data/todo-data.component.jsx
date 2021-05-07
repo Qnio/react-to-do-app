@@ -3,23 +3,38 @@ import React from 'react';
 //IMPORT CUSTOM COMPONENTS
 import DisplayTasksList from '../to-do-display/todo-display.component';
 
+//IMPORT STYLE SHEET
+import {
+  ToDoContainer,
+  ToDoContainerForm,
+  ToDoContainerFormInput,
+  ToDoForm,
+  ToDoFormButton,
+  ToDoTasksList,
+} from './todo-data.syles';
+
 class ToDoData extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      toDoList: [{ id: 0, taskName: 'Task 1', isDone: true }],
+      toDoList: [],
       task: '',
-      name: '',
     };
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-
+    const copyTasks = [...this.state.toDoList];
+    const task = {
+      id: copyTasks.length + 1,
+      taskName: this.state.task,
+      isDone: false,
+    };
+    copyTasks.push(task);
+    this.setState({ toDoList: copyTasks });
     this.setState({
       task: '',
-      name: '',
     });
 
     console.log(this.state);
@@ -32,33 +47,44 @@ class ToDoData extends React.Component {
     });
   };
 
+  handleTaskIsDone = (taskId) => {
+    const takeAllTasks = [...this.state.toDoList];
+    const triggeredTasks = takeAllTasks.map((task) => {
+      if (task.id === taskId) {
+        task.isDone = !task.isDone;
+        return task;
+      } else return task;
+    });
+
+    this.setState({ toDoList: triggeredTasks });
+  };
+
   render() {
     const { task, name } = this.state;
     return (
-      <div className='todo-form-container'>
-        <div className='todo-form-container__form'>
-          <form onSubmit={this.handleSubmit}>
-            <input
+      <ToDoContainer>
+        <ToDoContainerForm>
+          <ToDoForm onSubmit={this.handleSubmit}>
+            <ToDoContainerFormInput
               type='text'
               name='task'
               value={task}
               onChange={this.handleChange}
-            />
-            <input
-              type='text'
-              name='name'
-              value={name}
-              onChange={this.handleChange}
-            />
-            <button type='submit'>Add Task</button>
-          </form>
-        </div>
-        <div className='todo-form-container__tasks'>
+            ></ToDoContainerFormInput>
+
+            <ToDoFormButton type='submit'>Add Task</ToDoFormButton>
+          </ToDoForm>
+        </ToDoContainerForm>
+        <ToDoTasksList>
           {this.state.toDoList.map((task) => (
-            <DisplayTasksList key={task.id} task={task} />
+            <DisplayTasksList
+              key={task.id}
+              task={task}
+              handleTaskIsDone={this.handleTaskIsDone}
+            />
           ))}
-        </div>
-      </div>
+        </ToDoTasksList>
+      </ToDoContainer>
     );
   }
 }

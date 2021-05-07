@@ -1,11 +1,18 @@
-const DisplayTasksList = ({ task }) => {
+import { TaskItemsContainer, TaskItemIcon } from './todo-display.styles';
+import { IoCheckmarkDoneSharp } from 'react-icons/io5';
+
+const DisplayTasksList = ({ task, handleTaskIsDone }) => {
   const { id, taskName, isDone } = task;
   return (
-    <div className='task-item'>
-      <div className='task-item__id'>{id}</div>
+    <TaskItemsContainer>
+      <div className='task-item__id'>{id}.</div>
       <div className='task-item__task'>{taskName}</div>
-      <div className='task-item__id'>{isDone ? 'done' : 'not done'}</div>
-    </div>
+      <TaskItemIcon
+        onClick={() => handleTaskIsDone(id)}
+        isDone={isDone}
+        bgImage={IoCheckmarkDoneSharp}
+      ></TaskItemIcon>
+    </TaskItemsContainer>
   );
 };
 
