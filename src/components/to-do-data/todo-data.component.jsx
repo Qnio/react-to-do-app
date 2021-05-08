@@ -62,7 +62,7 @@ class ToDoData extends React.Component {
   };
 
   render() {
-    const { task, name } = this.state;
+    const { task } = this.state;
     return (
       <ToDoContainer>
         <h1>What's plan for today?</h1>

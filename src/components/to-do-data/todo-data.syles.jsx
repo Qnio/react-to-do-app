@@ -35,6 +35,12 @@ export const ToDoForm = styled.form`
 export const ToDoFormButton = styled.button`
   height: 40px;
   width: 80px;
+  color: white;
+  font-weight: bold;
+  background-color: black;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 5px 8px 26px 1px #000000;
 `;
 
 export const ToDoContainerFormInput = styled.input`
@@ -46,6 +52,11 @@ export const ToDoContainerFormInput = styled.input`
   font-size: 18px;
   border: 1px solid gray;
   border-radius: 5px;
+  &:focus {
+    outline: none;
+    background-color: white;
+    border-bottom: 2px solid #08d1a2;
+  }
   @media (max-width: 600px) {
     width: 100%;
 

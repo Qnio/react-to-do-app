@@ -1,9 +1,4 @@
 import styled, { css } from 'styled-components';
-import { IoCheckmarkDoneSharp } from 'react-icons/io5';
-
-const importImage = (props) => {
-  return props.bgImage;
-};
 
 const getTaskStatus = (props) => {
   return props.isDone ? taskIsDone : taskIsToDo;
