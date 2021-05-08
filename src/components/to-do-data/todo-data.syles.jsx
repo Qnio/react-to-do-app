@@ -4,6 +4,7 @@ export const ToDoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 20px;
   align-items: center;
   width: 80%;
   margin: 20px auto;
@@ -13,9 +14,8 @@ export const ToDoContainerForm = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  width: 400px;
-  height: 200px;
+  width: 100%;
+  height: 100px;
 `;
 
 export const ToDoForm = styled.form`
@@ -23,7 +23,13 @@ export const ToDoForm = styled.form`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   gap: 20px;
+  @media (max-width: 600px) {
+    width: 100%;
+
+    @content;
+  }
 `;
 
 export const ToDoFormButton = styled.button`
@@ -32,6 +38,7 @@ export const ToDoFormButton = styled.button`
 `;
 
 export const ToDoContainerFormInput = styled.input`
+  width: 50%;
   margin: 10px;
   background-color: white;
   display: block;
@@ -39,10 +46,45 @@ export const ToDoContainerFormInput = styled.input`
   font-size: 18px;
   border: 1px solid gray;
   border-radius: 5px;
+  @media (max-width: 600px) {
+    width: 100%;
+
+    @content;
+  }
 `;
 
 export const ToDoTasksList = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
+`;
+
+export const ToDoTaskListHeader = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid grey;
+  font-size: 24px;
+  padding-bottom: 10px;
+  @media (max-width: 600px) {
+    margin: 40px auto;
+
+    @content;
+  }
+`;
+
+export const ToDoTasksListHeaderItem = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &:first-child {
+    max-width: 40px;
+  }
+  &:last-child {
+    max-width: 120px;
+    justify-content: flex-end;
+  }
 `;

@@ -1,17 +1,29 @@
-import { TaskItemsContainer, TaskItemIcon } from './todo-display.styles';
+import {
+  TaskItemsContainer,
+  TaskItemIcon,
+  TaskItem,
+  LineThrough,
+} from './todo-display.styles';
 import { IoCheckmarkDoneSharp } from 'react-icons/io5';
 
 const DisplayTasksList = ({ task, handleTaskIsDone }) => {
   const { id, taskName, isDone } = task;
   return (
     <TaskItemsContainer>
-      <div className='task-item__id'>{id}.</div>
-      <div className='task-item__task'>{taskName}</div>
-      <TaskItemIcon
-        onClick={() => handleTaskIsDone(id)}
-        isDone={isDone}
-        bgImage={IoCheckmarkDoneSharp}
-      ></TaskItemIcon>
+      <TaskItem>{id}.</TaskItem>
+      {isDone ? (
+        <LineThrough>{taskName}</LineThrough>
+      ) : (
+        <TaskItem>{taskName}</TaskItem>
+      )}
+
+      <TaskItem>
+        <TaskItemIcon
+          onClick={() => handleTaskIsDone(id)}
+          isDone={isDone}
+          bgImage={IoCheckmarkDoneSharp}
+        ></TaskItemIcon>
+      </TaskItem>
     </TaskItemsContainer>
   );
 };

@@ -11,6 +11,8 @@ import {
   ToDoForm,
   ToDoFormButton,
   ToDoTasksList,
+  ToDoTaskListHeader,
+  ToDoTasksListHeaderItem,
 } from './todo-data.syles';
 
 class ToDoData extends React.Component {
@@ -63,6 +65,7 @@ class ToDoData extends React.Component {
     const { task, name } = this.state;
     return (
       <ToDoContainer>
+        <h1>What's plan for today?</h1>
         <ToDoContainerForm>
           <ToDoForm onSubmit={this.handleSubmit}>
             <ToDoContainerFormInput
@@ -76,6 +79,11 @@ class ToDoData extends React.Component {
           </ToDoForm>
         </ToDoContainerForm>
         <ToDoTasksList>
+          <ToDoTaskListHeader>
+            <ToDoTasksListHeaderItem>Id</ToDoTasksListHeaderItem>
+            <ToDoTasksListHeaderItem>Task name</ToDoTasksListHeaderItem>
+            <ToDoTasksListHeaderItem>Is Done?</ToDoTasksListHeaderItem>
+          </ToDoTaskListHeader>
           {this.state.toDoList.map((task) => (
             <DisplayTasksList
               key={task.id}
