@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { boxFrameWithShadow } from '../../shared/shared';
 
 export const ToDoContainer = styled.div`
   display: flex;
@@ -38,20 +39,16 @@ export const ToDoFormButton = styled.button`
   color: white;
   font-weight: bold;
   background-color: black;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 5px 8px 26px 1px #000000;
+  ${boxFrameWithShadow}
 `;
 
 export const ToDoContainerFormInput = styled.input`
   width: 50%;
   margin: 10px;
-  background-color: white;
-  display: block;
-  height: 2rem;
-  font-size: 18px;
-  border: 1px solid gray;
-  border-radius: 5px;
+  padding: 0 1rem;
+  height: 3rem;
+  font-size: 1.4rem;
+  ${boxFrameWithShadow}
   &:focus {
     outline: none;
     background-color: white;
@@ -71,31 +68,39 @@ export const ToDoTasksList = styled.div`
   gap: 10px;
 `;
 
-export const ToDoTaskListHeader = styled.div`
+//--------------------------TODO TASK LIST HEADER-----------------------//
+export const ToDoTasksListHeader = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid grey;
-  font-size: 24px;
-  padding-bottom: 10px;
-  @media (max-width: 600px) {
-    margin: 40px auto;
-
-    @content;
-  }
+  gap: 2rem;
 `;
-
 export const ToDoTasksListHeaderItem = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  &:first-child {
-    max-width: 40px;
-  }
-  &:last-child {
-    max-width: 120px;
-    justify-content: flex-end;
-  }
+  width: 30%;
+  font-size: 1.4rem;
+  text-align: left;
+  padding-bottom: 1rem;
 `;
+//--------------------------TODO TASK LIST HEADER-------------------END-//
+
+//--------------------------TODO TASK LIST CONTAINER-----------------------//
+
+export const ToDoTaskListContainer = styled.div`
+  width: 100%;
+
+  display: flex;
+  gap: 2rem;
+  flex-direction: row;
+`;
+
+export const ToDoTaskListTaskElement = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 30%;
+  min-height: 200px;
+  padding: 2rem;
+  ${boxFrameWithShadow}
+`;
+
+//--------------------------TODO TASK LIST CONTAINER-------------------END-//

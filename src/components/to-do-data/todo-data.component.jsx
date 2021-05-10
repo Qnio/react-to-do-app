@@ -2,6 +2,7 @@ import React from 'react';
 
 //IMPORT CUSTOM COMPONENTS
 import DisplayTasksList from '../to-do-display/todo-display.component';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 //IMPORT STYLE SHEET
 import {
@@ -11,8 +12,10 @@ import {
   ToDoForm,
   ToDoFormButton,
   ToDoTasksList,
-  ToDoTaskListHeader,
+  ToDoTasksListHeader,
   ToDoTasksListHeaderItem,
+  ToDoTaskListContainer,
+  ToDoTaskListTaskElement,
 } from './todo-data.syles';
 
 class ToDoData extends React.Component {
@@ -65,7 +68,7 @@ class ToDoData extends React.Component {
     const { task } = this.state;
     return (
       <ToDoContainer>
-        <h1>What's plan for today?</h1>
+        <h1>Build your plan.</h1>
         <ToDoContainerForm>
           <ToDoForm onSubmit={this.handleSubmit}>
             <ToDoContainerFormInput
@@ -79,18 +82,26 @@ class ToDoData extends React.Component {
           </ToDoForm>
         </ToDoContainerForm>
         <ToDoTasksList>
-          <ToDoTaskListHeader>
-            <ToDoTasksListHeaderItem>Id</ToDoTasksListHeaderItem>
-            <ToDoTasksListHeaderItem>Task name</ToDoTasksListHeaderItem>
-            <ToDoTasksListHeaderItem>Is Done?</ToDoTasksListHeaderItem>
-          </ToDoTaskListHeader>
-          {this.state.toDoList.map((task) => (
-            <DisplayTasksList
-              key={task.id}
-              task={task}
-              handleTaskIsDone={this.handleTaskIsDone}
-            />
-          ))}
+          <ToDoTasksListHeader>
+            <ToDoTasksListHeaderItem>Task:</ToDoTasksListHeaderItem>
+            <ToDoTasksListHeaderItem>In Progress:</ToDoTasksListHeaderItem>
+            <ToDoTasksListHeaderItem>Done:</ToDoTasksListHeaderItem>
+          </ToDoTasksListHeader>
+          <ToDoTaskListContainer>
+            <ToDoTaskListTaskElement>
+              <DragDropContext>
+                {this.state.toDoList.map((task) => (
+                  <DisplayTasksList
+                    key={task.id}
+                    task={task}
+                    handleTaskIsDone={this.handleTaskIsDone}
+                  />
+                ))}
+              </DragDropContext>
+            </ToDoTaskListTaskElement>
+            <ToDoTaskListTaskElement></ToDoTaskListTaskElement>
+            <ToDoTaskListTaskElement></ToDoTaskListTaskElement>
+          </ToDoTaskListContainer>
         </ToDoTasksList>
       </ToDoContainer>
     );
