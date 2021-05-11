@@ -26,6 +26,7 @@ class ToDoData extends React.Component {
       toDoList: [],
       inProgressList: [],
       task: '',
+      id: 1,
     };
   }
 
@@ -33,16 +34,13 @@ class ToDoData extends React.Component {
     e.preventDefault();
     const copyTasks = [...this.state.toDoList];
     const task = {
-      id: copyTasks.length + 1,
+      id: this.state.id,
       taskName: this.state.task,
       inProgress: false,
       isDone: false,
     };
     copyTasks.push(task);
-    this.setState({ toDoList: copyTasks });
-    this.setState({
-      task: '',
-    });
+    this.setState({ toDoList: copyTasks, id: this.state.id + 1, task: '' });
 
     console.log(this.state);
   };
