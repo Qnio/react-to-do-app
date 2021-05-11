@@ -2,7 +2,6 @@ import React from 'react';
 
 //IMPORT CUSTOM COMPONENTS
 import DisplayTasksList from '../to-do-display/todo-display.component';
-//import ToDoSeparateData from '../to-do-separate-data/todo-separate.component';
 
 //IMPORT STYLE SHEET
 import {
@@ -67,16 +66,12 @@ class ToDoData extends React.Component {
     this.setState({ toDoList: triggeredTasks }, () => console.log(this.state));
   };
 
-  handleTaskIsDone = (taskId) => {
-    const takeAllTasks = [...this.state.toDoList];
-    const triggeredTasks = takeAllTasks.map((task) => {
-      if (task.id === taskId) {
-        task.isDone = !task.isDone;
-        return task;
-      } else return task;
+  handleDeleteTask = (taskId) => {
+    this.setState({
+      toDoList: Object.values(this.state.toDoList).filter(
+        (task) => task.id !== taskId
+      ),
     });
-
-    this.setState({ toDoList: triggeredTasks });
   };
 
   render() {
@@ -110,6 +105,7 @@ class ToDoData extends React.Component {
                     <DisplayTasksList
                       key={task.id}
                       task={task}
+                      handleDeleteTask={this.handleDeleteTask}
                       handleTaskProgress={this.handleTaskProgress}
                     />
                   );
@@ -123,6 +119,7 @@ class ToDoData extends React.Component {
                     <DisplayTasksList
                       key={task.id}
                       task={task}
+                      handleDeleteTask={this.handleDeleteTask}
                       handleTaskProgress={this.handleTaskProgress}
                     />
                   );
@@ -136,6 +133,7 @@ class ToDoData extends React.Component {
                     <DisplayTasksList
                       key={task.id}
                       task={task}
+                      handleDeleteTask={this.handleDeleteTask}
                       handleTaskProgress={this.handleTaskProgress}
                     />
                   );

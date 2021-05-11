@@ -29,10 +29,21 @@ export const TaskItem = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
 
-  &:first-child,
-  &:last-child {
+  &:first-child {
     max-width: 40px;
   }
+
+  &:last-child {
+    max-width: 60px;
+  }
+`;
+
+export const DeleteIcon = styled.div`
+  width: 30px;
+  height: 30px;
+  background-image: url('/assets/images/close-circle-outline.svg');
+  background-repeat: no-repeat;
+  cursor: pointer;
 `;
 
 const taskIsStarted = css`
@@ -62,6 +73,6 @@ export const LineThrough = styled(TaskItem)`
   text-decoration: line-through;
 `;
 
-export const TaskItemIcon = styled.div`
+export const TaskItemFlowIcon = styled.div`
   ${getTaskStatus}
 `;
