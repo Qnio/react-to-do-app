@@ -1,7 +1,11 @@
 import styled, { css } from 'styled-components';
 
 const getTaskStatus = (props) => {
-  return props.isDone ? taskIsDone : taskIsToDo;
+  return !props.inProgress && !props.isDone
+    ? taskIsToDo
+    : props.isDone
+    ? taskIsDone
+    : taskIsStarted;
 };
 
 export const TaskItemsContainer = styled.div`
@@ -31,6 +35,14 @@ export const TaskItem = styled.div`
   }
 `;
 
+const taskIsStarted = css`
+  width: 30px;
+  height: 30px;
+  background-image: url('/assets/images/stop-outline.svg');
+  background-repeat: no-repeat;
+  cursor: pointer;
+`;
+
 const taskIsDone = css`
   width: 30px;
   height: 30px;
@@ -41,7 +53,7 @@ const taskIsDone = css`
 const taskIsToDo = css`
   width: 30px;
   height: 30px;
-  background-image: url('/assets/images/stop-outline.svg');
+  background-image: url('/assets/images/rocket-outline.svg');
   background-repeat: no-repeat;
 `;
 

@@ -9,6 +9,7 @@ export const ToDoContainer = styled.div`
   align-items: center;
   width: 80%;
   margin: 20px auto;
+  padding-top: 10rem;
 `;
 
 export const ToDoContainerForm = styled.div`
@@ -104,3 +105,12 @@ export const ToDoTaskListTaskElement = styled.div`
 `;
 
 //--------------------------TODO TASK LIST CONTAINER-------------------END-//
+
+//--------------------------Miinimal Graphic  CONTAINER-----------------------//
+export const MinimalGraphicContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-top: 2rem;
+`;

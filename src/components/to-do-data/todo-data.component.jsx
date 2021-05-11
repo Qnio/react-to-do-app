@@ -2,7 +2,7 @@ import React from 'react';
 
 //IMPORT CUSTOM COMPONENTS
 import DisplayTasksList from '../to-do-display/todo-display.component';
-import { DragDropContext } from 'react-beautiful-dnd';
+//import ToDoSeparateData from '../to-do-separate-data/todo-separate.component';
 
 //IMPORT STYLE SHEET
 import {
@@ -16,6 +16,7 @@ import {
   ToDoTasksListHeaderItem,
   ToDoTaskListContainer,
   ToDoTaskListTaskElement,
+  MinimalGraphicContainer,
 } from './todo-data.syles';
 
 class ToDoData extends React.Component {
@@ -24,6 +25,7 @@ class ToDoData extends React.Component {
 
     this.state = {
       toDoList: [],
+      inProgressList: [],
       task: '',
     };
   }
@@ -34,6 +36,7 @@ class ToDoData extends React.Component {
     const task = {
       id: copyTasks.length + 1,
       taskName: this.state.task,
+      inProgress: false,
       isDone: false,
     };
     copyTasks.push(task);
@@ -52,6 +55,18 @@ class ToDoData extends React.Component {
     });
   };
 
+  handleTaskProgress = (taskId, option) => {
+    const takeAllTasks = [...this.state.toDoList];
+    const triggeredTasks = takeAllTasks.map((task) => {
+      if (task.id === taskId) {
+        task[option] = !task[option];
+        return task;
+      } else return task;
+    });
+
+    this.setState({ toDoList: triggeredTasks }, () => console.log(this.state));
+  };
+
   handleTaskIsDone = (taskId) => {
     const takeAllTasks = [...this.state.toDoList];
     const triggeredTasks = takeAllTasks.map((task) => {
@@ -68,7 +83,7 @@ class ToDoData extends React.Component {
     const { task } = this.state;
     return (
       <ToDoContainer>
-        <h1>Build your plan.</h1>
+        <h1>Build your plan for today.</h1>
         <ToDoContainerForm>
           <ToDoForm onSubmit={this.handleSubmit}>
             <ToDoContainerFormInput
@@ -89,20 +104,52 @@ class ToDoData extends React.Component {
           </ToDoTasksListHeader>
           <ToDoTaskListContainer>
             <ToDoTaskListTaskElement>
-              <DragDropContext>
-                {this.state.toDoList.map((task) => (
-                  <DisplayTasksList
-                    key={task.id}
-                    task={task}
-                    handleTaskIsDone={this.handleTaskIsDone}
-                  />
-                ))}
-              </DragDropContext>
+              {this.state.toDoList.map((task) => {
+                if (!task.inProgress && !task.isDone) {
+                  return (
+                    <DisplayTasksList
+                      key={task.id}
+                      task={task}
+                      handleTaskProgress={this.handleTaskProgress}
+                    />
+                  );
+                } else return [];
+              })}
             </ToDoTaskListTaskElement>
-            <ToDoTaskListTaskElement></ToDoTaskListTaskElement>
-            <ToDoTaskListTaskElement></ToDoTaskListTaskElement>
+            <ToDoTaskListTaskElement>
+              {this.state.toDoList.map((task) => {
+                if (task.inProgress && !task.isDone) {
+                  return (
+                    <DisplayTasksList
+                      key={task.id}
+                      task={task}
+                      handleTaskProgress={this.handleTaskProgress}
+                    />
+                  );
+                } else return [];
+              })}
+            </ToDoTaskListTaskElement>
+            <ToDoTaskListTaskElement>
+              {this.state.toDoList.map((task) => {
+                if (task.isDone) {
+                  return (
+                    <DisplayTasksList
+                      key={task.id}
+                      task={task}
+                      handleTaskProgress={this.handleTaskProgress}
+                    />
+                  );
+                } else return [];
+              })}
+            </ToDoTaskListTaskElement>
           </ToDoTaskListContainer>
         </ToDoTasksList>
+        <MinimalGraphicContainer>
+          <img
+            src={`${process.env.PUBLIC_URL}/assets/images/craft.png`}
+            alt='some awesome graphic'
+          />
+        </MinimalGraphicContainer>
       </ToDoContainer>
     );
   }

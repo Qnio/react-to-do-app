@@ -3,11 +3,16 @@ import {
   TaskItemIcon,
   TaskItem,
   LineThrough,
+  TaskIsStarted,
 } from './todo-display.styles';
 import { IoCheckmarkDoneSharp } from 'react-icons/io5';
 
-const DisplayTasksList = ({ task, handleTaskIsDone }) => {
-  const { id, taskName, isDone } = task;
+const handleOptionForTrigger = (progress, done) => {
+  return !progress && !done ? 'inProgress' : 'isDone';
+};
+
+const DisplayTasksList = ({ task, handleTaskProgress }) => {
+  const { id, taskName, isDone, inProgress } = task;
   return (
     <TaskItemsContainer>
       <TaskItem>{id}.</TaskItem>
@@ -19,8 +24,11 @@ const DisplayTasksList = ({ task, handleTaskIsDone }) => {
 
       <TaskItem>
         <TaskItemIcon
-          onClick={() => handleTaskIsDone(id)}
+          onClick={() =>
+            handleTaskProgress(id, handleOptionForTrigger(inProgress, isDone))
+          }
           isDone={isDone}
+          inProgress={inProgress}
           bgImage={IoCheckmarkDoneSharp}
         ></TaskItemIcon>
       </TaskItem>
